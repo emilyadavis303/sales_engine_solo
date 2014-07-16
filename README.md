@@ -1,2 +1,5 @@
-Turing Project Three:
-Emily Davis & Cara Dennis
+Turing Project Three: Emily Davis
+- Solo work:
+  - Finish functionality
+  - Refactoring
+  - TDD

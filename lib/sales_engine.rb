@@ -26,4 +26,17 @@ class SalesEngine
     @transaction_repository  = TransactionRepository.new(self, @data_path)
   end
 
+  # merchant relationships
+  def find_items_for_merchant(merchant_id)
+    item_repository.find_all_by_merchant_id(merchant_id)
+  end
+
+  def find_invoices_for_merchant(merchant_id)
+    invoice_repository.find_all_by_merchant_id(merchant_id)
+  end
+
+  # transaction relationships
+  def find_invoice_for_transaction(id)
+    invoice_repository.find_by_id(id)
+  end
 end

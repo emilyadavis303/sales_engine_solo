@@ -1,20 +1,16 @@
-require './test/test_helper'
-require_relative '../lib/transaction_repository'
-require_relative '../lib/sales_engine'
+require_relative '../test_helper'
+require_relative '../../lib/transaction_repository'
+require_relative '../../lib/sales_engine'
 
 class TransactionRepositoryTest < Minitest::Test
   def setup
-    engine = SalesEngine.new('test/fixtures')
-    engine.startup
-    @repo ||= TransactionRepository.new(engine, 'test/fixtures')
+    @repo ||= TransactionRepository.new(@engine, '../test/fixtures')
   end
 
-  def test_it_exists
-    assert @repo
-  end
+  def test_it_loads_all_transactions
+    results = @repo.all
 
-  def test_a_repository_loads_transactions
-    assert @repo.count >= 10
+    assert_equal 16, results.count
   end
 
   def test_it_can_find_a_transaction_by_cc_number

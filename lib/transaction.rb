@@ -8,7 +8,7 @@ class Transaction
               :result,
               :created_at,
               :updated_at,
-              :repo_ref
+              :transaction_repo
 
   def initialize(row, repo_ref)
     @id                          = row[:id].to_i
@@ -18,11 +18,13 @@ class Transaction
     @result                      = row[:result]
     @created_at                  = Date.parse(row[:created_at])
     @updated_at                  = Date.parse(row[:updated_at])
-    @repo_ref                    = repo_ref
+    @transaction_repo            = repo_ref
   end
 
+  # relationships
   def invoice
-    repo_ref.engine.invoice_repository.find_by_id(@invoice_id)
+    transaction_repo.find_invoice_for_transaction(invoice_id)
+    #repo_ref.engine.invoice_repository.find_by_id(@invoice_id)
   end
-
+  
 end

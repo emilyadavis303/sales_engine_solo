@@ -16,16 +16,17 @@ class MerchantRepository
   end
 
   def random
-    merchants.shuffle.first
+    merchants.sample
   end
 
   def all
-    @merchants
+    merchants
   end
 
+  # finder methods
   def find_by_id(id)
     merchants.find do
-      |merchant| merchant.id.to_s == id.to_s
+      |merchant| merchant.id == id
     end
   end
 
@@ -41,6 +42,16 @@ class MerchantRepository
     end
   end
 
+  # relationships
+  def find_items_for_merchant(id)
+    engine.find_items_for_merchant(id)
+  end
+
+  def find_invoices_for_merchant(id)
+    engine.find_invoices_for_merchant(id)
+  end
+
+  # business intelligence
   def revenue(date)
     all_revenue = merchants.map do
       |merchant| merchant.revenue(date)
@@ -49,6 +60,7 @@ class MerchantRepository
     all_revenue.compact.reduce(0, :+)
   end
 
+  # count method for tests
   def count
     merchants.count
   end

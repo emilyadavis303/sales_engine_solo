@@ -1,0 +1,4 @@
+- Break apart tests (attributes, relationships, business intelligence)
+- Rewire relationships for Demeter
+- Rewire business intelligence
+- Finish functionality

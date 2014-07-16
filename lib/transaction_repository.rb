@@ -17,7 +17,7 @@ class TransactionRepository
   end
 
   def random
-    transactions.shuffle.first
+    transactions.sample
   end
 
   def all
@@ -36,12 +36,6 @@ class TransactionRepository
     }
   end
 
-  def find_all_invoices_by_result(invoice_id, result)
-    transactions.find_all {
-      |transaction| transaction(invoice_id).result == result
-    }
-  end
-
   def find_by_id(id)
     transactions.find {
       |transaction| transaction.id.to_s == id.to_s
@@ -54,6 +48,18 @@ class TransactionRepository
     }
   end
 
+  def find_all_invoices_by_result(invoice_id, result)
+    transactions.find_all {
+      |transaction| transaction(invoice_id).result == result
+    }
+  end
+
+  # relationships
+  def find_invoice_for_transaction(invoice_id)
+    engine.find_invoice_for_transaction(invoice_id)
+  end
+
+  # count method for tests
   def count
     transactions.count
   end
